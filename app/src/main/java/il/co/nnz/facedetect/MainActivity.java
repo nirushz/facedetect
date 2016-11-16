@@ -94,44 +94,53 @@ public class MainActivity extends AppCompatActivity {
         viewPager.setAdapter(viewPagerAdapter);
 
         // add listener to know when pages have changed
-        ViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+
+                // if we dont know how many dots we need, we will use an array
+                // but pagers usually dont need more than 5 and it is
+                // ok to change them manually like here
+
+                switch (position) {
+                    case 0:
+                        dot1.setImageResource(R.drawable.page_dot_selected);
+                        dot2.setImageResource(R.drawable.page_dot_unselected);
+                        dot3.setImageResource(R.drawable.page_dot_unselected);
+                        break;
+                    case 1:
+                        dot1.setImageResource(R.drawable.page_dot_unselected);
+                        dot2.setImageResource(R.drawable.page_dot_selected);
+                        dot3.setImageResource(R.drawable.page_dot_unselected);
+                        break;
+                    /*case 2:
+                        dot1.setImageResource(R.drawable.page_dot_unselected);
+                        dot2.setImageResource(R.drawable.page_dot_unselected);
+                        dot3.setImageResource(R.drawable.page_dot_selected);
+                        break;*/
+                    default:
+                        break;
+                }
 
 
-                                              @Override
-                                              public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+            }
 
-                                              }
+            @Override
+            public void onPageScrollStateChanged(int state) {
 
-                                              @Override
-                                              public void onPageSelected(int position) {
-                                                  switch (position) {
-                                                      case 0:
-                                                          dot1.setImageResource(R.drawable.page_dot_selected);
-                                                          dot2.setImageResource(R.drawable.page_dot_unselected);
-                                                          dot3.setImageResource(R.drawable.page_dot_unselected);
-                                                          break;
-                                                      case 1:
-                                                          dot1.setImageResource(R.drawable.page_dot_unselected);
-                                                          dot2.setImageResource(R.drawable.page_dot_selected);
-                                                          dot3.setImageResource(R.drawable.page_dot_unselected);
-                                                          break;
-                                                      case 2:
-                                                          dot1.setImageResource(R.drawable.page_dot_unselected);
-                                                          dot2.setImageResource(R.drawable.page_dot_unselected);
-                                                          dot3.setImageResource(R.drawable.page_dot_selected);
-                                                          break;
-                                                      default:
-                                                          break;
-                                                  }
-                                              }
+            }
+        });
 
-                                              }
+        //set animation
+        viewPager.setPageTransformer(true, new ZoomOutPageTransformer());
+    }
+}
 
-                                              @Override
-                                              public void onPageScrollStateChanged(int state) {
-
-                                              }
-                                          });
 /*
     public void processImage(View view) {
 
@@ -231,4 +240,4 @@ public class MainActivity extends AppCompatActivity {
         }
     }
     */
-}
+
